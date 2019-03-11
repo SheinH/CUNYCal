@@ -8,6 +8,7 @@
 5. Decide how to lay out application
 6. Begin coding!
 7. Aim for MVP (Minimum Viable Product)
+8. Expend on features
 
 # Things we will be using
 
