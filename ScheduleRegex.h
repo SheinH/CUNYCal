@@ -7,18 +7,22 @@
 
 #include <string>
 #include <vector>
-#include <ctime>
 #include <regex>
 #include <array>
 
-#define CLASS_REGEX_PATTERN "(?<subject>[A-Z]{3,4}) (?<classcode>\\d{5})-(?<section>\\w{1,3})\\n.+\\n(?:(?<days>(?:[A-Z][a-z]){1,7}) \\d{1,2}:\\d\\d((AM)|(PM)) - \\d{1,2}:\\d\\d((AM)|(PM))\\n(\\S+ )+(\\S+)\\n{0,1})+"
+#define CLASS_REGEX_PATTERN "([A-Z]{2,5}) (\\d{5})-(\\w+)\\n(\\w+) \\((\\d+)\\)\\n((?:(?:[A-Z][a-z])+ \\d{1,2}:\\d{2}(?:(?:AM)|(?:PM)) - \\d{1,2}:\\d{2}(?:(?:AM)|(?:PM))\\n(?:\\S+ )+(?:\\S+)\\n{0,1})+)"
+
+struct Time{
+	unsigned int hour;
+	unsigned int minute;
+};
 
 struct TimeInterval{
 	TimeInterval();
 
 	std::array<bool,7> weekday;
-	time_t beginning;
-	time_t end;
+	Time start;
+	Time end;
 };
 
 class Course {
@@ -39,8 +43,7 @@ private:
 Course& scanCourse(const std::string& input) {
 	std::regex pattern(CLASS_REGEX_PATTERN);
 	std::smatch matches;
-	if(std::regex_search(input,matches,pattern))
-		
+	std::regex_iterator<char>{input.begin(),input.end(),pattern};
 }
 
 #endif //CUNYCLASSES_SCHEDULEREGEX_H
