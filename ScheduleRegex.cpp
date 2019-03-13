@@ -17,13 +17,13 @@ const std::string &Course::getSection() const {
 	return section;
 }
 
-const std::vector<TimeInterval> &Course::getTimeIntervals() const {
+const std::vector<Course::TimeInterval> &Course::getTimeIntervals() const {
 	return timeIntervals;
 }
 
 Course::Course(const std::string &department, const unsigned int courseNum, const std::string &section) : department(
 		department), courseNum(courseNum), section(section) {}
 
-TimeInterval::TimeInterval() {
+Course::TimeInterval::TimeInterval() {
 	std::fill(weekday.begin(),weekday.end(),false);
 }
