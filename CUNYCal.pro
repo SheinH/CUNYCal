@@ -26,10 +26,12 @@ CONFIG += c++14
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        ScheduleRegex.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+        ScheduleRegex.h
 
 FORMS += \
         mainwindow.ui
