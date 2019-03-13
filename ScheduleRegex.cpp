@@ -5,25 +5,29 @@
 #include "ScheduleRegex.h"
 #include <vector>
 #include <iostream>
+
+#define CLASS_REGEX_PATTERN "([A-Z]{2,5}) (\\d{5})-(\\w+)\\n(\\w+) \\((\\d+)\\)\\n((?:(?:[A-Z][a-z])+ \\d{1,2}:\\d{2}(?:(?:AM)|(?:PM)) - \\d{1,2}:\\d{2}(?:(?:AM)|(?:PM))\\n(?:\\S+ )+(?:\\S+)\\n{0,1})+)"
+#define CLASS_TIME_REGEX "((?:[A-Z][a-z])+) (\\d{1,2}):(\\d{2})((?:AM)|(?:PM)) - (\\d{1,2}):(\\d{2})((?:AM)|(?:PM))\\n(\\S+) (\\S+)"
+
 const std::string &Course::getDepartment() const {
-	return department;
+    return department;
 }
 
 unsigned int Course::getCourseNum() const {
-	return courseNum;
+    return courseNum;
 }
 
 const std::string &Course::getSection() const {
-	return section;
+    return section;
 }
 
 Course::Course(const std::string &department, const unsigned int courseNum, const std::string &type,
-			   const std::string &section, const std::string &courseID, const std::vector<Course::Meeting> &meetings)
-		: department(department), courseNum(courseNum), type(type), section(section), courseID(courseID),
-		  meetings(meetings) {}
+               const std::string &section, const std::string &courseID, const std::vector<Course::Meeting> &meetings)
+        : department(department), courseNum(courseNum), type(type), section(section), courseID(courseID),
+          meetings(meetings) {}
 
 Course::Meeting::Meeting() {
-	std::fill(weekday.begin(),weekday.end(),false);
+    std::fill(weekday.begin(),weekday.end(),false);
 }
 
 std::ostream &operator<<(std::ostream &os, const Course::Meeting &meeting) {
@@ -32,25 +36,25 @@ std::ostream &operator<<(std::ostream &os, const Course::Meeting &meeting) {
         if(meeting.weekday[i])
             os << i << " ";
     }
-	os << " start: " << meeting.start << " end: " << meeting.end << " building: "
-	   << meeting.building << " room: " << meeting.room;
-	return os;
+    os << " start: " << meeting.start << " end: " << meeting.end << " building: "
+       << meeting.building << " room: " << meeting.room;
+    return os;
 }
 
 Course::Time::Time(unsigned int hour, unsigned int minute) : hour(hour), minute(minute) {}
 
 std::ostream &operator<<(std::ostream &os, const Course::Time &time1) {
-	os << "hour: " << time1.hour << " minute: " << time1.minute;
-	return os;
+    os << "hour: " << time1.hour << " minute: " << time1.minute;
+    return os;
 }
 
 std::ostream &operator<<(std::ostream &os, const Course &course) {
-	os << "department: " << course.department << " courseNum: " << course.courseNum << " type: " << course.type
-	   << " section: " << course.section << " courseID: " << course.courseID << " meetings: ";
-	for(auto m : course.meetings){
-	    os << m << '\n';
-	}
-	return os;
+    os << "Department: " << course.department << " courseNum: " << course.courseNum << " type: " << course.type
+       << " section: " << course.section << " courseID: " << course.courseID << " meetings: ";
+    for(auto m : course.meetings){
+        os << m << '\n';
+    }
+    return os;
 }
 
 
@@ -60,7 +64,7 @@ auto CourseScanner::scanCourseStrings(const std::string& input){
     std::regex pattern(CLASS_REGEX_PATTERN);
     std::sregex_iterator iterator{input.begin(),input.end(),pattern};
     const std::sregex_iterator end;
-    std::vector<std::smatch> courseStrings{7};
+    std::vector<std::smatch> courseStrings;
     while(iterator != end) {
         courseStrings.push_back(*iterator);
         iterator++;
@@ -81,7 +85,7 @@ auto CourseScanner::scanCourseTimes(const std::string& input){
     std::regex pattern(CLASS_TIME_REGEX);
     std::sregex_iterator iterator{input.begin(),input.end(),pattern};
     const std::sregex_iterator end;
-    std::vector<Course::Meeting> courseTimes{5};
+    std::vector<Course::Meeting> courseTimes;
     while(iterator != end) {
         courseTimes.emplace_back();
         Course::Meeting& meeting = *(courseTimes.end() - 1);
@@ -118,6 +122,7 @@ auto CourseScanner::smatchToCourse(const std::smatch& match){
 
 std::vector<Course> CourseScanner::scanCourses(const std::string& input){
     auto matches = scanCourseStrings(input);
+    std::cout << matches[0].str();
     std::vector<Course> courses;
     std::for_each(matches.begin(),matches.end(),[&courses](auto x){
         auto coursePtr = smatchToCourse(x);

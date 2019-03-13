@@ -19,7 +19,7 @@ find_package(Qt5Quick REQUIRED)
 include_directories(.)
 
 add_executable(CUNYClasses
-        regex_tester.cpp
+        main.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
