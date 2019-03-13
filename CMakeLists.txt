@@ -8,7 +8,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_PREFIX_PATH "~/Qt5.12.1/5.12.1/clang_64/lib/cmake")
+set(CMAKE_PREFIX_PATH "~/Qt/5.12.2/clang_64/lib/cmake")
 
 
 find_package(Qt5Core REQUIRED)
@@ -19,7 +19,7 @@ find_package(Qt5Quick REQUIRED)
 include_directories(.)
 
 add_executable(CUNYClasses
-        main.cpp
+        regex_tester.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui

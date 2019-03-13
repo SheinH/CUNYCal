@@ -5,17 +5,32 @@
 #include <string>
 #include <fstream>
 #include <streambuf>
+#include <regex>
 #include "ScheduleRegex.h"
 
+std::string get_file_contents(const char *filename)
+{
+	std::ifstream in(filename, std::ios::in | std::ios::binary);
+	if (in)
+	{
+		std::string contents;
+		in.seekg(0, std::ios::end);
+		contents.resize(in.tellg());
+		in.seekg(0, std::ios::beg);
+		in.read(&contents[0], contents.size());
+		in.close();
+		return(contents);
+	}
+	throw(errno);
+}
+
 int main(){
-	std::ifstream t("ExampleSchedules/bryan.txt");
-	std::string str;
+	std::string str = get_file_contents("ExampleSchedules/bryan.txt");
 
-	t.seekg(0, std::ios::end);
-	str.reserve(t.tellg());
-	t.seekg(0, std::ios::beg);
+	std::cout << str << '\n';
+	auto vect(CourseScanner::scanCourses(str));
 
-	str.assign((std::istreambuf_iterator<char>(t)),
-			   std::istreambuf_iterator<char>());
-	std::vector<std::string> array(CourseScanner::scanCourseStrings(str));
+	std::for_each(vect.begin(), vect.end(),[](auto course){
+		std::cout << course << std::endl << std::endl;
+	});
 }
