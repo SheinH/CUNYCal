@@ -31,10 +31,12 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
-        ScheduleRegex.h
+        ScheduleRegex.h \
+    let.h
 
 FORMS += \
-        mainwindow.ui
+    mainwindow.ui
+	nextwin.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
