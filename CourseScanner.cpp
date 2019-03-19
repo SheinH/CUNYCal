@@ -2,62 +2,11 @@
 // Created by Shein Htike on 2019-03-12.
 //
 
-#include "ScheduleRegex.h"
-#include <vector>
-#include <iostream>
-#include "let.h"
+#include "CourseScanner.h"
+#include "Course.h"
 
 #define CLASS_REGEX_PATTERN "([A-Z]{2,5}) (\\d{5})-(\\w+)\\n(\\w+) \\((\\d+)\\)\\n((?:(?:[A-Z][a-z])+ \\d{1,2}:\\d{2}(?:(?:AM)|(?:PM)) - \\d{1,2}:\\d{2}(?:(?:AM)|(?:PM))\\n(?:\\S+ )+(?:\\S+)\\n{0,1})+)"
 #define CLASS_TIME_REGEX "((?:[A-Z][a-z])+) (\\d{1,2}):(\\d{2})((?:AM)|(?:PM)) - (\\d{1,2}):(\\d{2})((?:AM)|(?:PM))\\n(\\S+) (\\S+)"
-
-const std::string &Course::getDepartment() const {
-	return department;
-}
-
-unsigned int Course::getCourseNum() const {
-	return courseNum;
-}
-
-const std::string &Course::getSection() const {
-	return section;
-}
-
-Course::Course(const std::string &department, const unsigned int courseNum, const std::string &type,
-			   const std::string &section, const std::string &courseID, const std::vector<Course::Meeting> &meetings)
-		: department(department), courseNum(courseNum), type(type), section(section), courseID(courseID),
-		  meetings(meetings) {}
-
-Course::Meeting::Meeting() {
-	std::fill(weekday.begin(), weekday.end(), false);
-}
-
-std::ostream &operator<<(std::ostream &os, const Course::Meeting &meeting) {
-	os << "Days: ";
-	for (int i = 0; i < 7; i++) {
-		if (meeting.weekday[i])
-			os << i << " ";
-	}
-	os << " start: " << meeting.start << " end: " << meeting.end << " building: "
-	   << meeting.building << " room: " << meeting.room;
-	return os;
-}
-
-Course::Time::Time(unsigned int hour, unsigned int minute) : hour(hour), minute(minute) {}
-
-std::ostream &operator<<(std::ostream &os, const Course::Time &time1) {
-	os << "hour: " << time1.hour << " minute: " << time1.minute;
-	return os;
-}
-
-std::ostream &operator<<(std::ostream &os, const Course &course) {
-	os << "Department: " << course.department << " courseNum: " << course.courseNum << " type: " << course.type
-	   << " section: " << course.section << " courseID: " << course.courseID << " meetings: ";
-	for (auto m : course.meetings) {
-		os << m << '\n';
-	}
-	return os;
-}
-
 
 //Returns a vector of string matches from an input string
 auto CourseScanner::scanCourseStrings(const std::string &input) {
@@ -116,7 +65,7 @@ auto CourseScanner::smatchToCourse(const std::smatch &match) {
     const std::string courseType = match[3].str();
     const std::string section = match[4].str();
     const std::string courseID = match[5].str();
-    let times = match[6];
+    const auto times = match[6];
     auto courseTimes = scanCourseTimes(times.first,times.second);
 	auto pointer = std::make_unique<Course>(dept, courseNum, courseType, section, courseID, courseTimes);
 	return pointer;

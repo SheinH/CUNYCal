@@ -6,7 +6,7 @@
 #include <fstream>
 #include <streambuf>
 #include <regex>
-#include "ScheduleRegex.h"
+#include "CourseScanner.h"
 
 std::string get_file_contents(const char *filename)
 {
