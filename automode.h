@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <memory>
+#include <QLabel>
+#include <QPushButton>
 
 
 namespace Ui {
@@ -24,6 +26,13 @@ private:
     std::unique_ptr<QMediaPlayer> mediaPlayer;
     std::unique_ptr<QMediaPlaylist> playlist;
     void set_continue_state(bool);
+    QClipboard* clipboard;
+    QLabel *indicator;
+    QLabel *statusLabel;
+    QPushButton *continueButton;
+    QMovie *spinner;
+    QPixmap pixmap;
+    bool continueEnabled;
 private slots:
     void clipboard_changed();
 };

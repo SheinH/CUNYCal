@@ -3,5 +3,6 @@
         <file>res/topslider_ccnycampus.jpg</file>
         <file>res/selectionexample.mov</file>
         <file>res/spinner.gif</file>
+        <file>res/check.png</file>
     </qresource>
 </RCC>

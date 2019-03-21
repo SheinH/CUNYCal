@@ -20,6 +20,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 add_executable(CUNYCal
         automode.cpp
@@ -32,7 +33,8 @@ add_executable(CUNYCal
         main.cpp
         win1.cpp
         win1.h
-        win1.ui)
+        win1.ui
+        res.qrc)
 
 
 target_link_libraries(CUNYCal Qt5::Core)
