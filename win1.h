@@ -2,7 +2,7 @@
 #define WIN1_H
 
 #include <QMainWindow>
-
+#include "automode.h"
 namespace Ui {
 class Win1;
 }
@@ -15,8 +15,11 @@ public:
     explicit Win1(QWidget *parent = nullptr);
     ~Win1();
 
+private slots:
+    void on_pushButton_clicked();
 private:
     Ui::Win1 *ui;
+    automode* autoMode;
 };
 
 #endif // WIN1_H

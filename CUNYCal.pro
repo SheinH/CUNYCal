@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,15 +28,18 @@ SOURCES += \
         main.cpp \
         win1.cpp \
     Course.cpp \
-    CourseScanner.cpp
+    CourseScanner.cpp \
+    automode.cpp
 
 HEADERS += \
         win1.h \
     Course.h \
-    CourseScanner.h
+    CourseScanner.h \
+    automode.h
 
 FORMS += \
-        win1.ui
+        win1.ui \
+    automode.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -44,3 +47,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES +=
+
+RESOURCES += \
+    res.qrc

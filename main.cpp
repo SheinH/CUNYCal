@@ -1,4 +1,5 @@
 #include "win1.h"
+#include "automode.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/topslider_ccnycampus.jpg</file>
+        <file>res/selectionexample.mov</file>
+        <file>res/spinner.gif</file>
+    </qresource>
+</RCC>
