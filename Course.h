@@ -8,6 +8,7 @@
 #include <vector>
 #include <array>
 #include <ostream>
+#include <optional>
 
 class Course {
 public:
@@ -38,20 +39,17 @@ public:
     Course(const std::string &department, const unsigned int courseNum, const std::string &type,
            const std::string &section, const std::string &courseID, const std::vector<Meeting> &meetings);
 
-    const std::string &getDepartment() const;
-
-    unsigned int getCourseNum() const;
-
-    const std::string &getSection() const;
-
-    friend std::ostream &operator<<(std::ostream &os, const Course &course);
+    Course(const std::string &department, const unsigned int courseNum, const std::vector<Meeting> &meetings,
+           const std::optional<std::string> &type,
+           const std::optional<std::string> &section, const std::optional<std::string> &courseID
+    );
 
 private:
     const std::string department;
     const unsigned int courseNum;
-    const std::string type;
-    const std::string section;
-    const std::string courseID;
+    const std::optional<std::string> type;
+    const std::optional<std::string> section;
+    const std::optional<std::string> courseID;
     const std::vector<Meeting> meetings;
 };
 
