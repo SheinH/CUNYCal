@@ -29,17 +29,20 @@ SOURCES += \
         win1.cpp \
     Course.cpp \
     CourseScanner.cpp \
-    automode.cpp
+    automode.cpp \
+    manualmode.cpp
 
 HEADERS += \
         win1.h \
     Course.h \
     CourseScanner.h \
-    automode.h
+    automode.h \
+    manualmode.h
 
 FORMS += \
         win1.ui \
-    automode.ui
+    automode.ui \
+    manualmode.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

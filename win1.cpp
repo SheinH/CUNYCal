@@ -7,6 +7,7 @@ Win1::Win1(QWidget *parent) :
 {
     ui->setupUi(this);
     autoMode = new automode();
+    manualMode = new manualmode();
 }
 
 Win1::~Win1()
@@ -16,6 +17,12 @@ Win1::~Win1()
 
 void Win1::on_pushButton_clicked()
 {
-    autoMode->show();
     close();
+    autoMode->show();
+}
+
+void Win1::on_pushButton_2_clicked()
+{
+    close();
+    manualMode->show();
 }

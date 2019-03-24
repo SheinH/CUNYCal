@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "automode.h"
+#include "manualmode.h"
 namespace Ui {
 class Win1;
 }
@@ -17,9 +18,12 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
+
 private:
     Ui::Win1 *ui;
     automode* autoMode;
+    manualmode* manualMode;
 };
 
 #endif // WIN1_H
