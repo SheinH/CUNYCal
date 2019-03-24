@@ -3,17 +3,6 @@
 //
 
 #include "Course.h"
-const std::string &Course::getDepartment() const {
-    return department;
-}
-
-unsigned int Course::getCourseNum() const {
-    return courseNum;
-}
-
-const std::string &Course::getSection() const {
-    return section;
-}
 
 Course::Course(const std::string &department, const unsigned int courseNum, const std::string &type,
                const std::string &section, const std::string &courseID, const std::vector<Course::Meeting> &meetings)
@@ -42,11 +31,11 @@ std::ostream &operator<<(std::ostream &os, const Course::Time &time1) {
     return os;
 }
 
-std::ostream &operator<<(std::ostream &os, const Course &course) {
-    os << "Department: " << course.department << " courseNum: " << course.courseNum << " type: " << course.type
-       << " section: " << course.section << " courseID: " << course.courseID << " meetings: ";
-    for (auto m : course.meetings) {
-        os << m << '\n';
-    }
-    return os;
-}
+
+Course::Course(const std::string &department, const unsigned int courseNum,
+               const std::vector<Course::Meeting> &meetings, const std::optional<std::string> &type = std::nullopt,
+               const std::optional<std::string> &section = std::nullopt,
+               const std::optional<std::string> &courseID = std::nullopt) : department(department),
+                                                                            courseNum(courseNum), type(type),
+                                                                            section(section), courseID(courseID),
+                                                                            meetings(meetings) {}
